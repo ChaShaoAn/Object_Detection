@@ -34,7 +34,7 @@ from utils.general import (LOGGER, check_file, check_img_size, check_imshow, che
 from utils.plots import Annotator, colors, save_one_box
 from utils.torch_utils import select_device, time_sync
 
-import time
+from tqdm import tqdm
 
 
 @torch.no_grad()
@@ -104,8 +104,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
         # model(torch.zeros(1, 3, *imgsz).to(device).type_as(next(model.model.parameters())))  # warmup
         pass
     dt, seen = [0.0, 0.0, 0.0], 0
-    start_time = time.time()
-    for path, im, im0s, vid_cap, s in dataset:
+    for path, im, im0s, vid_cap, s in tqdm(dataset):
         t1 = time_sync()
         im = torch.from_numpy(im).to(device)
         im = im.half() if half else im.float()  # uint8 to fp16/32
@@ -169,7 +168,8 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                             save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
             # Print time (inference-only)
-            LOGGER.info(f'{s}Done. ({t3 - t2:.3f}s)')
+            # take off logger because of googlecolab will fail
+            # LOGGER.info(f'{s}Done. ({t3 - t2:.3f}s)')
 
             # Stream results
             im0 = annotator.result()
@@ -196,14 +196,15 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                         vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
                     vid_writer[i].write(im0)
 
-    end_time = time.time()
-    print("\nInference time per image: ", (end_time - start_time) / len(dataset))
     # Print results
+    # take off logger because of googlecolab will fail
+    '''
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image
     LOGGER.info(f'Speed: %.1fms pre-process, %.1fms inference, %.1fms NMS per image at shape {(1, 3, *imgsz)}' % t)
     if save_txt or save_img:
         s = f"\n{len(list(save_dir.glob('labels/*.txt')))} labels saved to {save_dir / 'labels'}" if save_txt else ''
         LOGGER.info(f"Results saved to {colorstr('bold', save_dir)}{s}")
+    '''
     if update:
         strip_optimizer(weights)  # update model (to fix SourceChangeWarning)
 
