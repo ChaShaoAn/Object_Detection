@@ -4,8 +4,8 @@ import json
 from tqdm import tqdm
 import time
 
-txtpath = 'runs/detect/exp/labels/'
-testpath = 'data/svhn/test/'
+# txtpath = 'runs/detect/exp/labels/'
+# testpath = 'data/svhn/test/'
 
 
 def trans_to_json(txtpath='runs/detect/exp/labels/',
@@ -63,4 +63,4 @@ def trans_to_json(txtpath='runs/detect/exp/labels/',
         outfile.write(json_object)
 
 
-trans_to_json(txtpath, testpath)
+trans_to_json('runs/detect/exp/labels/', 'data/svhn/test/')
