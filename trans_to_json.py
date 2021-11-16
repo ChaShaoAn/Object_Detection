@@ -62,5 +62,5 @@ def trans_to_json(txtpath='runs/detect/exp/labels/',
     with open("answer.json", "w") as outfile:
         outfile.write(json_object)
 
-
-trans_to_json('runs/detect/exp/labels/', 'data/svhn/test/')
+if __name__ == "__main__":
+    trans_to_json('runs/detect/exp/labels/', 'data/svhn/test/')
