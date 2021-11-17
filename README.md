@@ -9,9 +9,9 @@ This is deep learning homework2, The proposed challenge is a street view house n
 - CUDA 11.1
 ## How to train
 1. Download the given dataset from [Google Drive](https://drive.google.com/drive/folders/1aRWnNvirWHXXXpPPfcWlHQuzGJdXagoc)
-2. make sure train images and digitStruct.mat is in 'data/svhn/train'
-3. cd to 'data/svhn/train' and run preprocess_mat_file.py, it will seperate train and valid, and generate label in txt file for each iamge
-4. now you can begin training model (yolov5m.pt will auto download)
+2. make sure `train images` and `digitStruct.mat` is in `data/svhn/train`
+3. cd to `data/svhn/train` and run `preprocess_mat_file.py`, it will seperate train and valid images to different folder (don't create valid folder by your own, or it will fail), and generate label in txt file for each iamge
+4. now you can begin training model (`yolov5m.pt` will auto download)
 ```
 python train.py --img 320 --batch 16 --epochs 50 --data svhn.yaml --weights yolov5m.pt
 ```
