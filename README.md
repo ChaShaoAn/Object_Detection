@@ -7,6 +7,11 @@ This is deep learning homework2, The proposed challenge is a street view house n
 - Python 3.8.11
 - Pytorch 1.9.1
 - CUDA 11.1
+- Yolo requirement
+```
+# install yolo requirements
+pip install -r requirements.txt
+```
 ## How to train
 1. Download the given dataset from [Google Drive](https://drive.google.com/drive/folders/1aRWnNvirWHXXXpPPfcWlHQuzGJdXagoc)
 2. make sure `train images` and `digitStruct.mat` is in `data/svhn/train`
