@@ -20,7 +20,19 @@ pip install -r requirements.txt
 # in data/svhn
 python preprocess_mat_file.py
 ```
-4. now you can begin training model (`yolov5m.pt` will auto download)
+4. make sure that `data/svhn.yaml` is correct, it would look like this:
+```
+# train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
+train: data/svhn/train  # 33402 images
+val: data/svhn/valid  # 3000 images
+
+# number of classes
+nc: 10
+
+# class names
+names: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+```
+5. now you can begin training model (`yolov5m.pt` will auto download)
 ```
 python train.py --img 320 --batch 16 --epochs 50 --data svhn.yaml --weights yolov5m.pt
 ```
